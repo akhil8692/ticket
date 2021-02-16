@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="movieModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbllocation">
+          <Key>
+            <PropertyRef Name="locid" />
+          </Key>
+          <Property Name="locid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="mocation" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="tblmovies">
+          <Key>
+            <PropertyRef Name="movieid" />
+          </Key>
+          <Property Name="movieid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="movie" Type="varchar" MaxLength="30" />
+          <Property Name="movietype" Type="varchar" MaxLength="30" />
+          <Property Name="description" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="tbltheatre">
+          <Key>
+            <PropertyRef Name="theatreid" />
+          </Key>
+          <Property Name="theatreid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="theatre" Type="varchar" MaxLength="30" />
+          <Property Name="locid" Type="int" />
+        </EntityType>
+        <Association Name="FK__tbltheatr__locid__2D27B809">
+          <End Role="tbllocation" Type="Self.tbllocation" Multiplicity="0..1" />
+          <End Role="tbltheatre" Type="Self.tbltheatre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbllocation">
+              <PropertyRef Name="locid" />
+            </Principal>
+            <Dependent Role="tbltheatre">
+              <PropertyRef Name="locid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="movieModelStoreContainer">
+          <EntitySet Name="tbllocation" EntityType="Self.tbllocation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblmovies" EntityType="Self.tblmovies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbltheatre" EntityType="Self.tbltheatre" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__tbltheatr__locid__2D27B809" Association="Self.FK__tbltheatr__locid__2D27B809">
+            <End Role="tbllocation" EntitySet="tbllocation" />
+            <End Role="tbltheatre" EntitySet="tbltheatre" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="movieModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tbllocation">
+          <Key>
+            <PropertyRef Name="locid" />
+          </Key>
+          <Property Name="locid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="mocation" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbltheatres" Relationship="Self.FK__tbltheatr__locid__2D27B809" FromRole="tbllocation" ToRole="tbltheatre" />
+        </EntityType>
+        <EntityType Name="tblmovy">
+          <Key>
+            <PropertyRef Name="movieid" />
+          </Key>
+          <Property Name="movieid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="movie" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="movietype" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tbltheatre">
+          <Key>
+            <PropertyRef Name="theatreid" />
+          </Key>
+          <Property Name="theatreid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="theatre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="locid" Type="Int32" />
+          <NavigationProperty Name="tbllocation" Relationship="Self.FK__tbltheatr__locid__2D27B809" FromRole="tbltheatre" ToRole="tbllocation" />
+        </EntityType>
+        <Association Name="FK__tbltheatr__locid__2D27B809">
+          <End Role="tbllocation" Type="Self.tbllocation" Multiplicity="0..1" />
+          <End Role="tbltheatre" Type="Self.tbltheatre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbllocation">
+              <PropertyRef Name="locid" />
+            </Principal>
+            <Dependent Role="tbltheatre">
+              <PropertyRef Name="locid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="movieEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbllocations" EntityType="Self.tbllocation" />
+          <EntitySet Name="tblmovies" EntityType="movieModel.tblmovy" />
+          <EntitySet Name="tbltheatres" EntityType="Self.tbltheatre" />
+          <AssociationSet Name="FK__tbltheatr__locid__2D27B809" Association="Self.FK__tbltheatr__locid__2D27B809">
+            <End Role="tbllocation" EntitySet="tbllocations" />
+            <End Role="tbltheatre" EntitySet="tbltheatres" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="movieModelStoreContainer" CdmEntityContainer="movieEntities">
+          <EntitySetMapping Name="tbllocations">
+            <EntityTypeMapping TypeName="movieModel.tbllocation">
+              <MappingFragment StoreEntitySet="tbllocation">
+                <ScalarProperty Name="locid" ColumnName="locid" />
+                <ScalarProperty Name="mocation" ColumnName="mocation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblmovies">
+            <EntityTypeMapping TypeName="movieModel.tblmovy">
+              <MappingFragment StoreEntitySet="tblmovies">
+                <ScalarProperty Name="movieid" ColumnName="movieid" />
+                <ScalarProperty Name="movie" ColumnName="movie" />
+                <ScalarProperty Name="movietype" ColumnName="movietype" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbltheatres">
+            <EntityTypeMapping TypeName="movieModel.tbltheatre">
+              <MappingFragment StoreEntitySet="tbltheatre">
+                <ScalarProperty Name="theatreid" ColumnName="theatreid" />
+                <ScalarProperty Name="theatre" ColumnName="theatre" />
+                <ScalarProperty Name="locid" ColumnName="locid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

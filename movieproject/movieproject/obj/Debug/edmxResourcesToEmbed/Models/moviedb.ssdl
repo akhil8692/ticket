@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="movieModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tbllocation">
+    <Key>
+      <PropertyRef Name="locid" />
+    </Key>
+    <Property Name="locid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="mocation" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="tblmovies">
+    <Key>
+      <PropertyRef Name="movieid" />
+    </Key>
+    <Property Name="movieid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="movie" Type="varchar" MaxLength="30" />
+    <Property Name="movietype" Type="varchar" MaxLength="30" />
+    <Property Name="description" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="tbltheatre">
+    <Key>
+      <PropertyRef Name="theatreid" />
+    </Key>
+    <Property Name="theatreid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="theatre" Type="varchar" MaxLength="30" />
+    <Property Name="locid" Type="int" />
+  </EntityType>
+  <Association Name="FK__tbltheatr__locid__2D27B809">
+    <End Role="tbllocation" Type="Self.tbllocation" Multiplicity="0..1" />
+    <End Role="tbltheatre" Type="Self.tbltheatre" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbllocation">
+        <PropertyRef Name="locid" />
+      </Principal>
+      <Dependent Role="tbltheatre">
+        <PropertyRef Name="locid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="movieModelStoreContainer">
+    <EntitySet Name="tbllocation" EntityType="Self.tbllocation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblmovies" EntityType="Self.tblmovies" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbltheatre" EntityType="Self.tbltheatre" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__tbltheatr__locid__2D27B809" Association="Self.FK__tbltheatr__locid__2D27B809">
+      <End Role="tbllocation" EntitySet="tbllocation" />
+      <End Role="tbltheatre" EntitySet="tbltheatre" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,34 @@
+﻿@model IEnumerable<movieproject1.Models.tblmovy>
+@{
+    ViewBag.Title = "moviename";
+}
+
+<h2>moviename</h2>
+@Html.ActionLink("addmovie", "addmovie", "movie")
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(obj => obj.movieid)</th>
+            <th>@Html.DisplayNameFor(obj => obj.movie)</th>
+            <th>@Html.DisplayNameFor(obj => obj.movietype)</th>
+            <th>@Html.DisplayNameFor(obj => obj.description)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(obj => item.movieid)</td>
+                <td>@Html.DisplayFor(obj => item.movie)</td>
+                <td>@Html.DisplayFor(obj => item.movietype)</td>
+                <td>@Html.DisplayFor(obj => item.description)</td>
+                <td>@Html.ActionLink("edit", "editmovie", new { id = item.movieid })</td>
+                <td>@Html.ActionLink("delete", "deletemovie", new { id = item.movieid })</td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+

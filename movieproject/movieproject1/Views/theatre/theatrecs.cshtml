@@ -1,0 +1,29 @@
+﻿@model IEnumerable<movieproject1.Models.tbltheatre>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Theatre</h2>
+@Html.ActionLink("addtheatre","addtheatre","theatre")
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(obj => obj.theatreid)</th>
+            <th>@Html.DisplayNameFor(obj => obj.theatre)</th>
+            <th>@Html.DisplayNameFor(obj => obj.locid)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(obj => item.theatreid)</td>
+                <td>@Html.DisplayFor(obj => item.theatre)</td>
+                <td>@Html.DisplayFor(obj => item.locid)</td>
+                <td>@Html.ActionLink("edit", "edittheatre", new { id = item.locid })</td>
+                <td>@Html.ActionLink("delete", "deletetheatre", new { id = item.theatreid })</td>
+            </tr>
+        }
+    </tbody>
+</table>
+

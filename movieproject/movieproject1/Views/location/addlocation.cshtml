@@ -1,0 +1,24 @@
+﻿@model movieproject1.Models.tbllocation
+
+@{
+    ViewBag.Title = "addlocation";
+}
+
+<h2>addlocation</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="row">
+        <div class="col-md-12">
+
+            <label>Location</label>
+            @Html.TextBoxFor(obj => obj.locid)
+            @Html.TextBoxFor(obj => obj.mocation)
+
+        </div>
+        <input type="submit" name="submit" value="submit" />
+        <input type="reset" name="reset" value="reset" />
+    </div>
+}
+
+

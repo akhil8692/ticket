@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="movieModelStoreContainer" CdmEntityContainer="movieEntities">
+    <EntitySetMapping Name="tbllocations">
+      <EntityTypeMapping TypeName="movieModel.tbllocation">
+        <MappingFragment StoreEntitySet="tbllocation">
+          <ScalarProperty Name="locid" ColumnName="locid" />
+          <ScalarProperty Name="mocation" ColumnName="mocation" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblmovies">
+      <EntityTypeMapping TypeName="movieModel.tblmovy">
+        <MappingFragment StoreEntitySet="tblmovies">
+          <ScalarProperty Name="movieid" ColumnName="movieid" />
+          <ScalarProperty Name="movie" ColumnName="movie" />
+          <ScalarProperty Name="movietype" ColumnName="movietype" />
+          <ScalarProperty Name="description" ColumnName="description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbltheatres">
+      <EntityTypeMapping TypeName="movieModel.tbltheatre">
+        <MappingFragment StoreEntitySet="tbltheatre">
+          <ScalarProperty Name="theatreid" ColumnName="theatreid" />
+          <ScalarProperty Name="theatre" ColumnName="theatre" />
+          <ScalarProperty Name="locid" ColumnName="locid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,30 @@
+﻿@model movieproject1.Models.tblmovy
+
+@{
+    ViewBag.Title = "editmovie";
+}
+
+<h2>editmovie</h2>
+
+<div class="row">
+    <div class="col-md-12">
+        <h4>mobile details</h4>
+        <hr />
+
+        @using (Html.BeginForm())
+        {
+            <div class="form-group">
+                <label for="mobile">Location</label>
+                @Html.TextBoxFor(obj => obj.movieid, new { @class = "form-control" })
+                @Html.TextBoxFor(obj => obj.movie, new { @class = "form-control" })
+                @Html.TextBoxFor(obj => obj.movietype, new { @class = "form-control" })
+                @Html.TextBoxFor(obj => obj.description, new { @class = "form-control" })
+            </div>
+
+            <input type="submit" name="name" value="edit" class="btn btn-success" />
+
+        }
+    </div>
+</div>
+
+

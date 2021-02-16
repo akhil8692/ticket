@@ -1,0 +1,28 @@
+﻿@model IEnumerable<movieproject1.Models.tbllocation>
+@{
+    ViewBag.Title = "location";
+}
+
+<h2>Location</h2>
+@Html.ActionLink("addlocation", "addlocation", "location")
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Loaction Id</th>
+            <th>Location</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(obj => item.locid)</td>
+                <td>@Html.DisplayFor(obj => item.mocation)</td>
+                <td>@Html.ActionLink("edit", "editlocation", new { id = item.locid })</td>
+                <td>@Html.ActionLink("delete", "deletelocation", new { id = item.locid })</td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+

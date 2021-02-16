@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="movieModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tbllocation">
+    <Key>
+      <PropertyRef Name="locid" />
+    </Key>
+    <Property Name="locid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="mocation" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tbltheatres" Relationship="Self.FK__tbltheatr__locid__2D27B809" FromRole="tbllocation" ToRole="tbltheatre" />
+  </EntityType>
+  <EntityType Name="tblmovy">
+    <Key>
+      <PropertyRef Name="movieid" />
+    </Key>
+    <Property Name="movieid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="movie" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="movietype" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="description" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="tbltheatre">
+    <Key>
+      <PropertyRef Name="theatreid" />
+    </Key>
+    <Property Name="theatreid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="theatre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="locid" Type="Int32" />
+    <NavigationProperty Name="tbllocation" Relationship="Self.FK__tbltheatr__locid__2D27B809" FromRole="tbltheatre" ToRole="tbllocation" />
+  </EntityType>
+  <Association Name="FK__tbltheatr__locid__2D27B809">
+    <End Role="tbllocation" Type="Self.tbllocation" Multiplicity="0..1" />
+    <End Role="tbltheatre" Type="Self.tbltheatre" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbllocation">
+        <PropertyRef Name="locid" />
+      </Principal>
+      <Dependent Role="tbltheatre">
+        <PropertyRef Name="locid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="movieEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tbllocations" EntityType="Self.tbllocation" />
+    <EntitySet Name="tblmovies" EntityType="Self.tblmovy" />
+    <EntitySet Name="tbltheatres" EntityType="Self.tbltheatre" />
+    <AssociationSet Name="FK__tbltheatr__locid__2D27B809" Association="Self.FK__tbltheatr__locid__2D27B809">
+      <End Role="tbllocation" EntitySet="tbllocations" />
+      <End Role="tbltheatre" EntitySet="tbltheatres" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
